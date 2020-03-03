@@ -325,7 +325,7 @@ int main()
     double* array_of_doubles = hw08::dynamic_allocation_array_doubles(1000);
     // use array_of_doubles here
     // ... // [4.9] free array, no longer needed
-
+    delete array_of_doubles;
 	// Q#5 - dynamic 2d arrays, indexing via subscript operator, pointer arithmetic
 
     // tic tac toe board is an array of int pointers
@@ -334,9 +334,11 @@ int main()
     // declare a pointer to an array of int pointers (i.e. a pointer to a pointer of type int)
     int** p_p_tictactoe = new int*[hw08::TIC_TAC_TOE_SIZE];
     // ...  // [5.1] row1: dynamically allocate int[TIC_TAC_TOE_SIZE], use initializer list to init to {1,0,0}
+    p_p_tictactoe[0] = new int[hw08::TIC_TAC_TOE_SIZE]{1,0,0};
     // ...  // [5.2] row2: dynamically allocate int[TIC_TAC_TOE_SIZE], use initializer list to init to {0,1,0}
+    p_p_tictactoe[1] = new int[hw08::TIC_TAC_TOE_SIZE]{0,1,0};
     // ...  // [5.3] row3: dynamically allocate int[TIC_TAC_TOE_SIZE], use initializer list to init to {0,0,1}
-
+    p_p_tictactoe[2] = new int[hw08::TIC_TAC_TOE_SIZE]{0,0,1};
     // print 2dints via subscript operator
     hw08::print_2darray_dynamic_subscript(p_p_tictactoe, hw08::TIC_TAC_TOE_SIZE, hw08::TIC_TAC_TOE_SIZE);
     // print 2dints via pointer arithmetic
@@ -345,9 +347,11 @@ int main()
     // clean up board, go in reverse order of declaration
 
     // [5.4] delete individual rows (i.e. rows are int arrays, use delete [])
-    //for(// ...) // ...
+    for(int i = 0; i < hw08::TIC_TAC_TOE_SIZE; i++){
+    	delete p_p_tictactoe[i];
+    }
     // [5.5] delete board (board is an array of int pointers, use delete [])
-    // ...
+    delete p_p_tictactoe;
 
 
     return 0;
@@ -412,13 +416,15 @@ int main()
 [4.7]// delete pi; will only affect ri. junk replaces its value
 [4.8]// delete [] ri3; will only affect ri2 because ri3 refers to the memory location
 	// not the value at the memory location. junk replaces the value at ri2.
-[4.9]
+[4.9]delete array_of_doubles;
 */
 
 /*Q5
-[5.1]
-[5.2]
-[5.3]
-[5.4]
-[5.5]
+[5.1]p_p_tictactoe[0] = new int[hw08::TIC_TAC_TOE_SIZE]{ 1,0,0 };
+[5.2]p_p_tictactoe[1] = new int[hw08::TIC_TAC_TOE_SIZE]{ 0,1,0 };
+[5.3]p_p_tictactoe[2] = new int[hw08::TIC_TAC_TOE_SIZE]{ 0,0,1 };
+[5.4]for(int i = 0; i < hw08::TIC_TAC_TOE_SIZE; i++){
+    	delete p_p_tictactoe[i];
+    }
+[5.5]delete p_p_tictactoe;
 */
