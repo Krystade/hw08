@@ -1,5 +1,5 @@
 CC = g++
-FLAGS = -std=c++14 - Wall - g
+FLAGS = -std=c++14 -Wall
 OBJS = 
 
 all: hw08
